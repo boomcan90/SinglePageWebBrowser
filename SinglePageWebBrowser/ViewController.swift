@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var WebBrowser: UIWebView!
     var address: String!
     
-    let swipe = UISwipeGestureRecognizer()
+//    let swipe = UISwipeGestureRecognizer()
     
     func load() {
         address = TextField.text!
@@ -38,7 +38,26 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         load()
         
-        swipe.addTarget(self, action: "swipeControl")
+//Refer to: http://stackoverflow.com/questions/24215117/how-to-recognize-swipe-in-all-4-directions
+        
+//        var swipeRight = UISwipeGestureRecognizer(target: self, action: "swipeControl:")
+//        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+//        self.view.addGestureRecognizer(swipeRight)
+//        
+//        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "swipeControl:")
+//        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+//        self.view.addGestureRecognizer(swipeLeft)
+//        
+//        var swipeDown = UISwipeGestureRecognizer(target: self, action: "swipeControl:")
+//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+//        self.view.addGestureRecognizer(swipeDown)
+//        
+//        var swipeUp = UISwipeGestureRecognizer(target: self, action: "swipeControl:")
+//        swipeUp.direction = UISwipeGestureRecognizerDirection.Down
+//        self.view.addGestureRecognizer(swipeUp)
+        
+        var swipe = UISwipeGestureRecognizer()
+        swipe.addTarget(self, action: "swipeControl:") //needed the ":" for it to work
         view.userInteractionEnabled = true
         view.addGestureRecognizer(swipe)
         
@@ -63,8 +82,18 @@ class ViewController: UIViewController {
         WebBrowser.reload()
     }
 
-    func swipeControl() {
-        
+    func swipeControl(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            println("swiped");
+//            switch swipeGesture.direction {
+//            case UISwipeGestureRecognizerDirection.Right:
+//                println("Swiped right")
+//            case UISwipeGestureRecognizerDirection.Down:
+//                println("Swiped down")
+//            default:
+//                break
+//            }
+        }
     }
     
     @IBAction func hideView(thebutton: UIButton) {
